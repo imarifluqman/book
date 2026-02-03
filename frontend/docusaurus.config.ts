@@ -114,7 +114,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/imarifluqman/book',
+              href: 'https://github.com/imarifluqman/Physical-AI-Humanoid-Robotics',
             },
             {
               label: 'Facebook',

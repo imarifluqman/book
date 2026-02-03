@@ -36,12 +36,12 @@ jobs:
 
       # 3️⃣ Install dependencies (frontend folder)
       - name: Install dependencies
-        working-directory: ./book/frontend   # <-- important
+        working-directory: ./Physical-AI-Humanoid-Robotics/frontend   # <-- important
         run: npm ci
 
       # 4️⃣ Build the project (frontend folder)
       - name: Build
-        working-directory: ./book/frontend   # <-- important
+        working-directory: ./Physical-AI-Humanoid-Robotics/frontend   # <-- important
         run: npm run build
 
       # 5️⃣ Setup GitHub Pages
@@ -52,7 +52,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./book/frontend/build   # <-- build folder inside frontend
+          path: ./Physical-AI-Humanoid-Robotics/frontend/build   # <-- build folder inside frontend
 
       # 7️⃣ Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
