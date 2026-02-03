@@ -1,4 +1,3 @@
-
 name: Deploy to GitHub Pages
 
 on:
@@ -15,33 +14,47 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
 jobs:
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
+      # 1️⃣ Checkout repo
       - name: Checkout
         uses: actions/checkout@v3
-      # 👇 Build steps
+
+      # 2️⃣ Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20.x
           cache: 'npm'
+
+      # 3️⃣ Install dependencies (frontend folder)
       - name: Install dependencies
+        working-directory: ./book/frontend   # <-- important
         run: npm ci
+
+      # 4️⃣ Build the project (frontend folder)
       - name: Build
+        working-directory: ./book/frontend   # <-- important
         run: npm run build
-      # 👆 Build steps
+
+      # 5️⃣ Setup GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
+      # 6️⃣ Upload build artifact
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # 👇 Specify build output path
-          path: build
+          path: ./book/frontend/build   # <-- build folder inside frontend
+
+      # 7️⃣ Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
